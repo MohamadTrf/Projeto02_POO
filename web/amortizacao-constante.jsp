@@ -4,6 +4,7 @@
     Author     : Gabi
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,7 @@
         <%@include file="WEB-INF/jspf/cabecalho.jspf" %>
     </head>
     <body>
+    
         <%@include file="WEB-INF/jspf/menu.jspf" %>
             <h2>Amortização Constante</h2>
 
@@ -25,23 +27,63 @@
             <p>O valor da amortização é calculada dividindo-se o valor do principal pelo número de períodos de pagamento, ou seja, de parcelas.</p>
 
             <hr>
-
-        <form>
             Empréstimo R$ <input type="number" name="emprestimo">
             Prazo: <input type="number" name="prazo">
             Taxa de Juros%: <input type="number" name="jutos" placeholder="Em porcentagem">
             <input type="submit" value="Calular" name="calulo">
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        </form>
-
-            <%@include file="WEB-INF/jspf/rodape.jspf" %>
-    </body>
+            <% if (request.getParameter("taxa")!= null && request.getParameter("divida") != null && request.getParameter("n") != null){%>
+                <%try{ %>
+                    <%    double i = 0, n = 0, divida = 0, amortizacao = 0, juros = 0, totala = 0, totalj = 0, prestacao = 0, totalp = 0;
+                    DecimalFormat formato = new DecimalFormat ("#.##");
+                    i = Double.parseDouble(request.getParameter("taxa")) / 100;
+                    divida = Double.parseDouble(request.getParameter("divida"));
+                    n = Double.parseDouble(request.getParameter("n"));
+                    amortizacao = divida / n; %>
+                    <table class="table table-hover">
+                        <thead>
+                             <tr>
+                                <th>Período(meses)</th>
+                                <th>Prestação</th>
+                                <th>Juros</th>
+                                <th>Amortização</th>
+                                <th>Saldo Devedor</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td> 0 </td>
+                            <td> - </td>
+                            <td> - </td>
+                            <td> - </td>
+                            <td> R$ <%= formato.format(divida)%> </td>
+                        </tr>   
+                        <% for (int x = 1; x <= n; x++) {%>
+                            <tr>
+                                <td><%=x%></td>
+                                <%prestacao = amortizacao + (divida * i);%>
+                                <td>R$ <%=formato.format(prestacao)%></td>
+                                <%totalp = prestacao + totalp;
+                                  juros = divida *i;
+                                  totalj = juros + totalj;
+                                  totala = amortizacao + totala; %>
+                                <td>R$ <%=formato.format(juros)%></td>
+                                <td> R$ <%=formato.format(amortizacao)%></td>  
+                                <% divida = divida - amortizacao; %>
+                                <td>R$ <%=formato.format(divida) %></td>
+                            </tr>
+                        <% } %>
+                        <tr>
+                            <td>∑ →</td>
+                            <td>R$ <%=formato.format(totalp) %></td>
+                            <td>R$ <%=formato.format(totalj) %></td>
+                            <td>R$ <%=formato.format(totala) %></td>
+                            <td> - </td>
+                        </tr>
+                    </table>
+                <%} catch (Exception ex) {
+                        if(request.getParameter("taxa") != null) {
+                        }
+                } %> 
+            <% } %>
+    <%@include file="WEB-INF/jspf/rodape.jspf" %>
+    </body>    
 </html>
