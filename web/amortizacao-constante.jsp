@@ -29,17 +29,17 @@
             <hr>
             Empréstimo R$ <input type="number" name="emprestimo">
             Prazo: <input type="number" name="prazo">
-            Taxa de Juros%: <input type="number" name="jutos" placeholder="Em porcentagem">
+            Taxa de Juros%: <input type="number" name="juros" placeholder="Em porcentagem">
             <input type="submit" value="Calular" name="calulo">
-            <% if (request.getParameter("taxa")!= null && request.getParameter("divida") != null && request.getParameter("n") != null){%>
+            <% if (request.getParameter("juros")!= null && request.getParameter("divida") != null && request.getParameter("n") != null){%>
                 <%try{ %>
                     <%    double i = 0, n = 0, divida = 0, amortizacao = 0, juros = 0, totala = 0, totalj = 0, prestacao = 0, totalp = 0;
                     DecimalFormat formato = new DecimalFormat ("#.##");
-                    i = Double.parseDouble(request.getParameter("taxa")) / 100;
+                    i = Double.parseDouble(request.getParameter("juros")) / 100;
                     divida = Double.parseDouble(request.getParameter("divida"));
                     n = Double.parseDouble(request.getParameter("n"));
                     amortizacao = divida / n; %>
-                    <table class="table table-hover">
+                    <table border="2">
                         <thead>
                              <tr>
                                 <th>Período(meses)</th>
@@ -80,10 +80,13 @@
                         </tr>
                     </table>
                 <%} catch (Exception ex) {
-                        if(request.getParameter("taxa") != null) {
+                        if(request.getParameter("juros") != null) {
                         }
                 } %> 
             <% } %>
     <%@include file="WEB-INF/jspf/rodape.jspf" %>
     </body>    
 </html>
+
+
+
