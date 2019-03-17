@@ -27,8 +27,8 @@
             <p>O valor da amortização é calculada dividindo-se o valor do principal pelo número de períodos de pagamento, ou seja, de parcelas.</p>
 
             <hr>
-            Empréstimo R$ <input type="number" name="emprestimo">
-            Prazo: <input type="number" name="prazo">
+            Empréstimo R$ <input type="number" name="divida">
+            Prazo: <input type="number" name="n">
             Taxa de Juros%: <input type="number" name="juros" placeholder="Em porcentagem">
             <input type="submit" value="Calular" name="calulo">
             <% if (request.getParameter("juros")!= null && request.getParameter("divida") != null && request.getParameter("n") != null){%>
