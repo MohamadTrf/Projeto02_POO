@@ -1,4 +1,53 @@
-<%-- any content can be specified here e.g.: --%>
-<%@ page pageEncoding="UTF-8" %>
-<h6>Desenvolvido por: Allan, Daniel Rares, Gabriela Duarte e Mohamed</h6>
-<hr/>
+<!-- Footer -->
+<div style="margin-top: 26%">
+    <hr/>
+<footer class="page-footer font-small blue pt-4">
+
+    <div class="container-fluid text-center text-md-left">
+
+    
+      <div class="row">
+
+   
+        <div class="col-md-6 mt-md-0 mt-3">
+
+          
+          <h5 class="text-uppercase">Faculdade de Tecnologia da Praia Grande</h5>
+          <p>Trabalho com intuito de obtenção de nota da disciplina de P00</p>
+
+        </div>
+     
+
+        <hr class="clearfix w-100 d-md-none pb-3">
+
+     
+        <div class="col-md-3 mb-md-0 mb-3">
+
+      
+            <h5 class="text-uppercase">GITHUB DOS INTEGRANTES</h5>
+
+            <ul class="list-unstyled">
+              <li>
+                <a href="https://github.com/danielrares1">Daniel Rares</a>
+              </li>
+              <li>
+                <a href="https://github.com/MohamadTrf">Mohamad Tarif</a>
+              </li>
+              <li>
+                <a href="#!">Allan José</a>
+              </li>
+              <li>
+                <a href="https://github.com/Gabriela87">Gabriela Santos</a>
+              </li>
+            </ul>
+
+          </div>
+        
+
+      </div>
+    
+
+    </div>
+
+  </footer>
+   </div>
