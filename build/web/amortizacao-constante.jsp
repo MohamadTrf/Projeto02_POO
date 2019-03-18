@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Amortização Constante</title>
+        <title>Amortizações</title>
         <%@include file="WEB-INF/jspf/cabecalho.jspf" %>
     </head>
     <body>
@@ -27,57 +27,64 @@
             <p>O valor da amortização é calculada dividindo-se o valor do principal pelo número de períodos de pagamento, ou seja, de parcelas.</p>
 
             <hr>
-            <form>
-                Empréstimo R$ <input type="text" name="valor">
-                Prazo: <input type="text" name="meses">
-                Taxa de Juros%: <input type="text" name="juros" placeholder="Em porcentagem">
-                <input type="submit" value="Calcular" name="calculo">
-            </form>
-            <% if (request.getParameter("calculo")!= null ){%>
+            Empréstimo R$ <input type="number" name="divida">
+            Prazo: <input type="number" name="n">
+            Taxa de Juros%: <input type="number" name="juros" placeholder="Em porcentagem">
+            <input type="submit" value="Calular" name="calulo">
+            <% if (request.getParameter("juros")!= null && request.getParameter("divida") != null && request.getParameter("n") != null){%>
                 <%try{ %>
-                    <%
-                        double valor = Double.parseDouble(request.getParameter("valor"));
-                        int meses = Integer.parseInt(request.getParameter("meses"));
-                        double taxaJuros = Double.parseDouble(request.getParameter("juros"));
-                        taxaJuros = taxaJuros/100;
-                        double amortizacao ;
-                        amortizacao = valor/meses;
-                        double jurosTotal;
-                        double prestacao;
-                        double totalPrestacao;
-                        double totalJuros = 0;
-                    %>
-                    <table border = "2">
-                     <tr>
-                        <th> Mês </th>
-                        <th> Saldo Devedor   </th>
-                        <th> Amortizacao </th>
-                        <th> Juros </th>
-                        <th> Prestacao </th>
-                    </tr>
-                        <%for (int i=1; i<=meses;i++) {  %>
-                        <% jurosTotal = valor * taxaJuros; %>
-                        <% valor = valor - amortizacao; %>
-                        <% prestacao = amortizacao + jurosTotal; %>
+                    <%    double i = 0, n = 0, divida = 0, amortizacao = 0, juros = 0, totala = 0, totalj = 0, prestacao = 0, totalp = 0;
+                    DecimalFormat formato = new DecimalFormat ("#.##");
+                    i = Double.parseDouble(request.getParameter("juros")) / 100;
+                    divida = Double.parseDouble(request.getParameter("divida"));
+                    n = Double.parseDouble(request.getParameter("n"));
+                    amortizacao = divida / n; %>
+                    <table border="2">
+                        <thead>
+                             <tr>
+                                <th>Período(meses)</th>
+                                <th>Prestação</th>
+                                <th>Juros</th>
+                                <th>Amortização</th>
+                                <th>Saldo Devedor</th>
+                            </tr>
+                        </thead>
                         <tr>
-                            <td> <%=i%> </td>  
-                            <td> <%=Math.round(valor)%> </td> 
-                            <td> <%=Math.round(amortizacao)%> </td> 
-                            <td> <%=Math.round(jurosTotal)%> </td> 
-                            <td> <%=Math.round(prestacao)%> </td> 
+                            <td> 0 </td>
+                            <td> - </td>
+                            <td> - </td>
+                            <td> - </td>
+                            <td> R$ <%= formato.format(divida)%> </td>
+                        </tr>   
+                        <% for (int x = 1; x <= n; x++) {%>
+                            <tr>
+                                <td><%=x%></td>
+                                <%prestacao = amortizacao + (divida * i);%>
+                                <td>R$ <%=formato.format(prestacao)%></td>
+                                <%totalp = prestacao + totalp;
+                                  juros = divida *i;
+                                  totalj = juros + totalj;
+                                  totala = amortizacao + totala; %>
+                                <td>R$ <%=formato.format(juros)%></td>
+                                <td> R$ <%=formato.format(amortizacao)%></td>  
+                                <% divida = divida - amortizacao; %>
+                                <td>R$ <%=formato.format(divida) %></td>
+                            </tr>
+                        <% } %>
+                        <tr>
+                            <td>∑ →</td>
+                            <td>R$ <%=formato.format(totalp) %></td>
+                            <td>R$ <%=formato.format(totalj) %></td>
+                            <td>R$ <%=formato.format(totala) %></td>
+                            <td> - </td>
                         </tr>
-                            <%totalJuros = totalJuros +jurosTotal; %>
-                        <%}%>
-                            <% totalPrestacao = (amortizacao*meses)+totalJuros; %>
                     </table>
-                       <h1> Total das prestações <%=Math.round(totalPrestacao)%> </h1>
-                        
-                <%} catch (Exception ex) { %>
-                <h1><%=ex%> </h1>
-                    <h1 style = 'color:red;'> Erro ao fazer amortazição americana</h1>
-              <%  } %> 
-                
+                <%} catch (Exception ex) {
+                        if(request.getParameter("juros") != null) {
+                        }
+                } %> 
             <% } %>
+    <%@include file="WEB-INF/jspf/rodape.jspf" %>
     </body>    
 </html>
 
