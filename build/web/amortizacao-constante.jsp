@@ -77,11 +77,11 @@
                         <%}%>
                             <% totalPrestacao = (amortizacao*meses)+totalJuros; %>
                     </table>
-                       <h1> Total das prestações <%=Math.round(totalPrestacao)%> </h1>
+                       <h2> Total das prestações <%=Math.round(totalPrestacao)%> </h2>
 
                 <%} catch (Exception ex) { %>
                 <h1><%=ex%> </h1>
-                    <h1 style = 'color:red;'> Erro ao fazer amortazição americana</h1>
+                    <h2 style = 'color:red;'> Erro ao fazer amortazição americana</h2>
               <%  } %> 
 
             <% } %>

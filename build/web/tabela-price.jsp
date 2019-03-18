@@ -67,7 +67,7 @@
                
             <%}%>
         <% } catch(Exception ex){ %>
-        <h1 style = 'color:red;'> Erro ao fazer tabela price</h1>
+        <h2 style = 'color:red;'> Erro ao fazer tabela price</h2>
         <%} %>
          <%@include file="WEB-INF/jspf/rodape.jspf" %>
     </body>
