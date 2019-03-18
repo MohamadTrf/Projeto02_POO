@@ -18,10 +18,10 @@
         <h2>Tabela Price</h2>
         
         <form>
-            Empréstimo R$ <input type="number" name="divida">
-            Prazo: <input type="number" name="n">
-            Taxa de Juros%: <input type="number" name="juros" placeholder="Em porcentagem">
-            <input type="submit" value="Calular" name="calulo">
+                Empréstimo R$ <input type="text" name="valor"/> 
+                Prazo em Meses <input type="text" name="meses"/> 
+                Taxa de Juros % <input type="text" name="juros" placeholder="Em porcentagem"/>
+                <input type ="submit" value="Calcular" name="calculo"/> <br>
         </form>
         <%try{ %>
             <%if(request.getParameter("calculo")!= null){%>

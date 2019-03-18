@@ -16,11 +16,16 @@
        
         <%@include file="WEB-INF/jspf/menu.jspf"%> <br>
          <h2>Amortização Americana</h2>
+         <p>O Sistema de Amortização Americano é uma forma de pagamento de empréstimos que se caracteriza pelo pagamento apenas dos juros da dívida,deixando o valor da dívida constante, que pode ser paga em apenas um único pagamento.</p>
+
+         <p>Esse sistema de amortização tem a vantagem em relação ao sistema de pagamento único, pois nele não há incidência de juros sobre juros. Os juros sempre incidem sobre o valor original da dívida. Com isso o devedor pode quitar sua dívida quando quiser.</p>
+
+         <p>Tem como desvantagem que o pagamento de juros pode, em tese, ser perpétuo mesmo quando já se pagou o equivalente à dívida em si. Para isso, basta que o número de prestações exceda 100% quando da soma dos juros simples.</p>
         <form>
-            Empréstimo R$ <input type="number" name="divida">
-            Prazo: <input type="number" name="n">
-            Taxa de Juros%: <input type="number" name="juros" placeholder="Em porcentagem">
-            <input type="submit" value="Calular" name="calulo">
+                Empréstimo R$<input type="text" name="valor"/> 
+                Prazo em Meses <input type="text" name="meses"/> 
+                Taxa de Juros % <input type="text" name="juros" placeholder="Em porcentagem"/> 
+                <input type ="submit" value="Calcular" name="calculo"/> <br>
         </form>
         <%try{ %>
             <%if(request.getParameter("calculo")!= null){%>
@@ -49,7 +54,7 @@
                  <%  }%>
                  <%jurosTotal = jurosTotal*meses;%>
                  <% totalAmortizacao = valor+jurosTotal;%>
-                 <h1> Total <%=totalAmortizacao%> </h1>
+                 <h2> Total <%=totalAmortizacao%> </h2>
                 </table>
                
             <%}%>
