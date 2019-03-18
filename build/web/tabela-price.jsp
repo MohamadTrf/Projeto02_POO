@@ -11,17 +11,17 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tabela Price</title>
-        <%@include file="WEB-INF/jspf/cabecalho.jspf" %>
+        
     </head>
     <body>
-        <h1>Tabela Price!</h1>
-        <%@include file="WEB-INF/jspf/menu.jspf"%> <br>
+        <%@include file="WEB-INF/jspf/menu.jspf"%><br>  
+        <h2>Tabela Price</h2>
         
         <form>
-            Valor R$<input type="text" name="valor"/> <br>
-            Meses <input type="text" name="meses"/> <br>
-            Juros <input type="text" name="juros" placeholder="Em porcentagem"/> <br>
-            <input type ="submit" value="Calcular" name="calculo"/> <br>
+            Empréstimo R$ <input type="number" name="divida">
+            Prazo: <input type="number" name="n">
+            Taxa de Juros%: <input type="number" name="juros" placeholder="Em porcentagem">
+            <input type="submit" value="Calular" name="calulo">
         </form>
         <%try{ %>
             <%if(request.getParameter("calculo")!= null){%>
@@ -69,6 +69,6 @@
         <% } catch(Exception ex){ %>
         <h1 style = 'color:red;'> Erro ao fazer tabela price</h1>
         <%} %>
-        
+         <%@include file="WEB-INF/jspf/rodape.jspf" %>
     </body>
 </html>
